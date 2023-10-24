@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>バナーポイント</title>
+    <script>
+        let points = 0;
+
+        function addPointAndRedirect() {
+            points++;
+            document.getElementById('pointDisplay').innerText = '現在のポイント: ' + points;
+
+            // 1秒後に指定したURLに遷移
+            setTimeout(() => {
+                window.location.href = 'https://www.youtube.com/channel/UCweAnCcF1iH34-JIM8XeZJQ'; // ここに遷移先のURLを指定
+            }, 1000); // 1000ミリ秒 = 1秒
+        }
+    </script>
+</head>
+<body>
+    <h1>バナーポイント</h1>
+    <p>バナーをクリックして1ポイントを獲得し、1秒後に指定したURLに遷移しよう！</p>
+    <a href="javascript:void(0);" onclick="addPointAndRedirect();">
+        <img src="バナー.png" alt="バナー">
+    </a>
+    <p id="pointDisplay">現在のポイント: 0</p>
+</body>
+</html>

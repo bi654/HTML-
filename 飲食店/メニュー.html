@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ja"> <!-- 言語を日本語に設定 -->
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles.css">
+  <title>カジュアルな飲食店</title>
+</head>
+<body>
+  <header>
+    <h1>カジュアルな飲食店</h1>
+    <p>美味しい料理がお待ちしています</p>
+  </header>
+
+  <nav>
+    <ul>
+      <li><a href="メニュー.html">メニュー</a></li>
+      <li><a href="お店について.html">お店について</a></li>
+      <li><a href="お問い合わせ.html">お問い合わせ</a></li>
+      <li><a href="クーポン.html">クーポン</a></li>
+    </ul>
+  </nav>
+
+
+  <section id="menu">
+    <h2>メニュー</h2>
+    <div class="menu-item" onmouseover="showDescription('ハンバーガー', 'ジューシーなビーフパティと新鮮な野菜がたっぷりのハンバーガーです。')">
+      <img src="ハンバーガー.png" alt="ハンバーガー">
+      <h3>ハンバーガー</h3>
+      <p>¥1000</p>
+    </div>
+
+    <div class="menu-item" onmouseover="showDescription('パスタ', 'アルデンテなパスタに特製ソースが絡まります。')">
+      <img src="パスタ.png" alt="パスタ">
+      <h3>パスタ</h3>
+      <p>¥1200</p>
+    </div>
+
+    <div class="menu-item" onmouseover="showDescription('うどん', 'もちもちした食感とあったかいスープが特徴のうどん。一口食べれば、心も体も温まります。')">
+      <img src="うどん.png" alt="うどん">
+      <h3>うどん</h3>
+      <p>¥1200</p>
+    </div>
+
+    <div class="menu-item" onmouseover="showDescription('寿司', '新鮮な海の恵みが、口の中で舞い踊る贅沢なひととき。')">
+        <img src="寿司.png" alt="寿司">
+        <h3>寿司</h3>
+        <p>¥100</p>
+    </div>
+      
+    <div class="menu-item" onmouseover="showDescription('醤油ラーメン', '肉厚な麺と深みのあるスープが、心を温かく包み込む至福の味。')">
+        <img src="醤油ラーメン2.jpg" alt="醤油ラーメン">
+        <h3>醤油ラーメン</h3>
+        <p>¥1000</p>
+    </div>
+      
+    <div class="menu-item" onmouseover="showDescription('ピザ', 'サクサク生地の中に、カラフルな旅が始まる。一切れで冒険気分！')">
+        <img src="ピザ.png" alt="ピザ">
+        <h3>ピザ</h3>
+        <p>¥2000</p>
+    </div>
+      
+    <!-- 他のメニューアイテムも同様に追加 -->
+  </section>
+
+  <div id="item-description" class="description">
+    メニューアイテムにマウスを重ねて詳細を表示します。
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>

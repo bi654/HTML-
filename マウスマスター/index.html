@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>マウスマスター</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="game-container">
+        <h1>マウスマスター</h1>
+        <p id="score">Score: 0</p>
+        <p id="timer"></p>
+        <div id="target" onclick="handleClick()"></div>
+        <button onclick="startGame('timeAttack', '60s')">Time Attack (60s)</button>
+        <button onclick="startGame('timeAttack', '90s')">Time Attack (90s)</button>
+        <button onclick="startGame('level')">Level Mode</button>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

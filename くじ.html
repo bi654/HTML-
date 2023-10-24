@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>くじ </title>
+  <style>
+    /* スタイリングはお好みで調整してね */
+    .omikuji {
+      border: 1px solid #000;
+      padding: 10px;
+      margin: 10px;
+      display: inline-block;
+    }
+  </style>
+</head>
+<body>
+
+<h1>くじ確率0.01</h1>
+
+<div class="omikuji" id="omikuji1">
+  <h2>くじ1</h2>
+  <p class="result">？</p>
+</div>
+
+<div class="omikuji" id="omikuji2">
+  <h2>くじ2</h2>
+  <p class="result">？</p>
+</div>
+
+<div class="omikuji" id="omikuji3">
+    <h2>くじ3</h2>
+    <p class="result">？</p>
+</div>  
+
+<div class="omikuji" id="omikuji4">
+    <h2>くじ4</h2>
+    <p class="result">？</p>
+</div>
+
+<div class="omikuji" id="omikuji5">
+    <h2>くじ5</h2>
+    <p class="result">？</p>
+</div>
+
+<div class="omikuji" id="omikuji6">
+    <h2>くじ6</h2>
+    <p class="result">？</p>
+</div>
+
+<div class="omikuji" id="omikuji7">
+    <h2>くじ7</h2>
+    <p class="result">？</p>
+</div>
+
+<div class="omikuji" id="omikuji8">
+    <h2>くじ8</h2>
+    <p class="result">？</p>
+</div>
+
+<div class="omikuji" id="omikuji9">
+    <h2>くじ9</h2>
+    <p class="result">？</p>
+</div>
+<!-- これをくじの数だけ繰り返す -->
+
+<script>
+  // くじを引く関数
+  function drawOmikuji(omikujiId) {
+    // ここで当たりやハズレのロジックを追加
+    var result = Math.random() < 0.01? "当たり！" : "ハズレ";
+    document.getElementById(omikujiId).querySelector(".result").innerText = result;
+  }
+
+  // くじを引くアクションを追加（例：ボタンをクリックしたらくじを引く）
+  document.getElementById("omikuji1").addEventListener("click", function() {
+    drawOmikuji("omikuji1");
+  });
+
+  document.getElementById("omikuji2").addEventListener("click", function() {
+    drawOmikuji("omikuji2");
+  });
+
+  document.getElementById("omikuji3").addEventListener("click", function() {
+    drawOmikuji("omikuji3");
+  });
+
+  document.getElementById("omikuji4").addEventListener("click", function() {
+    drawOmikuji("omikuji4");
+  });
+
+  document.getElementById("omikuji5").addEventListener("click", function() {
+    drawOmikuji("omikuji5");
+  });
+
+  document.getElementById("omikuji6").addEventListener("click", function() {
+    drawOmikuji("omikuji6");
+  });
+
+  document.getElementById("omikuji7").addEventListener("click", function() {
+    drawOmikuji("omikuji7");
+  });
+
+  document.getElementById("omikuji8").addEventListener("click", function() {
+    drawOmikuji("omikuji8");
+  });
+
+  document.getElementById("omikuji9").addEventListener("click", function() {
+    drawOmikuji("omikuji9");
+  });
+
+
+  // くじの数だけ繰り返す
+</script>
+
+</body>
+</html>

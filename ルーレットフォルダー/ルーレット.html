@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            background-color: rgb(0, 255, 0)
+        }
+
+        #roulette {
+            font-size: 40px;
+            height: 100px;
+            width: 500px;
+            border: 1px solid #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: white;  
+        }
+
+        button:disabled {
+            color: red;
+            background-color: gray;
+        }
+    </style>
+</head>
+<body onload="resetButtons()">
+    <div id="roulette">スタート</div>
+    <button id="startButton" onclick="startRoulette()">スタート</button>
+    <button id="stopButton" onclick="stopRoulette()" disabled>ストップ</button>
+    <button id="resetButton" onclick="resetButtons()">リセット</button>
+
+    <script>
+        var words = ["100円引き", "200円引き", "500円引き", "700円引き", "1000円引き", "1500円引き", "ハズレ", "ハズレ", "2000円引き", "無料", "300円引き", "ハズレ", "400円引き", "600円引き", "ハズレ", "ハズレ"];
+        var intervalId;
+
+        function resetButtons() {
+            document.getElementById("roulette").innerText = 'ルーレット';
+            document.getElementById("startButton").disabled = false;
+            document.getElementById("stopButton").disabled = true;
+            if (intervalId) {
+                clearInterval(intervalId);
+            }
+        }
+
+        function startRoulette() {
+            document.getElementById("startButton").disabled = true;
+            document.getElementById("stopButton").disabled = false;
+            intervalId = setInterval(function() {
+                var randomIndex = Math.floor(Math.random() * words.length);
+                document.getElementById("roulette").innerText = words[randomIndex];
+            }, 100);
+        }
+
+        function stopRoulette() {
+            document.getElementById("startButton").disabled = false;
+            document.getElementById("stopButton").disabled = true;
+            clearInterval(intervalId);
+        }
+    </script>
+</body>
+</html>
