@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>画像スライダー</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body>
+
+<div id="slider-container">
+    <div id="slider">
+        <div class="slide"><img src="1.png" alt="Image 1"></div>
+        <div class="slide"><img src="2.png" alt="Image 2"></div>
+        <div class="slide"><img src="3.png" alt="Image 3"></div>
+        <!-- さらに画像を追加することができます -->
+    </div>
+</div>
+
+<button id="prev-btn" onclick="changeSlide(-1)">❮</button>
+<button id="next-btn" onclick="changeSlide(1)">❯</button>
+
+<script src="script.js"></script>
+</body>
+</html>
