@@ -1,0 +1,44 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+@keyframes fall {
+    0% { top: -50px; }
+    100% { top: 100%; }
+}
+
+.number {
+    position: fixed;
+    animation-name: fall;
+    animation-duration: 10s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}
+
+body {
+    background-color: #00ff00; /* Green background */
+    margin: 0; /* Remove default margin */
+    height: 100vh; /* Full viewport height */
+    overflow: hidden; /* Hide overflow */
+}
+
+</style>
+</head>
+<body>
+<script>
+function createNumber() {
+    var number = document.createElement('div');
+    number.classList.add('number');
+    number.textContent = '？';
+    number.style.left = Math.random() * 100 + '%';
+    number.style.fontSize = Math.random() * 20 + 10 + 'px';
+    number.style.animationDuration = Math.random() * 5 + 5 + 's';
+    number.style.color = '#000000'; // Set color to
+    document.body.appendChild(number);
+}
+
+setInterval(createNumber, 500);
+</script>
+</body>
+</html>
