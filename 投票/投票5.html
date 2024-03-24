@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>投票アプリ</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+  </style>
+</head>
+<body>
+
+<h1>お好きな色を選んでください</h1>
+
+<form id="voteForm">
+  <label>
+    <input type="radio" name="color" value="red"> 赤
+  </label>
+  <label>
+    <input type="radio" name="color" value="blue"> 青
+  </label>
+  <label>
+    <input type="radio" name="color" value="green"> 緑
+  </label>
+  <br>
+  <button type="button" onclick="submitVote()">投票する</button>
+  <button type="button" onclick="clearVote()">データを削除する</button>
+</form>
+
+<h2>投票結果一覧</h2>
+<ul id="voteResults"></ul>
+
+<script>
+  // 初回訪問時にローカルストレージからデータを取得
+  window.onload = function () {
+    showStoredVotes();
+  };
+
+  function submitVote() {
+    var selectedColor = document.querySelector('input[name="color"]:checked');
+
+    if (selectedColor) {
+      // 投票結果をローカルストレージに保存
+      saveVote(selectedColor.value);
+
+      // 投票結果を表示
+      showStoredVotes();
+    } else {
+      alert('色を選んでください！');
+    }
+  }
+
+  function clearVote() {
+    // ローカルストレージからデータを削除
+    localStorage.removeItem('userVotes');
+
+    // 投票結果表示エリアをクリア
+    var voteResults = document.getElementById('voteResults');
+    voteResults.innerHTML = 'データが削除されました。';
+  }
+
+  function saveVote(vote) {
+    // ローカルストレージから既存のデータを取得
+    var storedVotes = JSON.parse(localStorage.getItem('userVotes')) || {};
+
+    // すでに同じ色が投票されている場合はカウントを増やす
+    storedVotes[vote] = (storedVotes[vote] || 0) + 1;
+
+    // 更新されたデータをローカルストレージに保存
+    localStorage.setItem('userVotes', JSON.stringify(storedVotes));
+  }
+
+  function showStoredVotes() {
+    // ローカルストレージからデータを取得
+    var storedVotes = JSON.parse(localStorage.getItem('userVotes')) || {};
+
+    // 投票結果表示エリアを取得
+    var voteResults = document.getElementById('voteResults');
+
+    // 投票結果表示エリアをクリア
+    voteResults.innerHTML = '';
+
+    // 投票結果を表示
+    for (var color in storedVotes) {
+      var listItem = document.createElement('li');
+      listItem.textContent = color + ': ' + storedVotes[color] + '回';
+      voteResults.appendChild(listItem);
+    }
+  }
+</script>
+
+</body>
+</html>

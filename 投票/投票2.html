@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>投票アプリ</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+  </style>
+</head>
+<body>
+
+<h1>お好きな色を選んでください</h1>
+
+<form id="voteForm">
+  <label>
+    <input type="radio" name="color" value="red"> 赤
+  </label>
+  <label>
+    <input type="radio" name="color" value="blue"> 青
+  </label>
+  <label>
+    <input type="radio" name="color" value="green"> 緑
+  </label>
+  <br>
+  <button type="button" onclick="submitVote()">投票する</button>
+  <button type="button" onclick="clearVote()">データを削除する</button>
+</form>
+
+<div id="result"></div>
+
+<script>
+  // 初回訪問時にローカルストレージからデータを取得
+  window.onload = function () {
+    var storedVote = localStorage.getItem('userVote');
+    if (storedVote) {
+      var resultDiv = document.getElementById('result');
+      resultDiv.innerHTML = '前回の選択: ' + storedVote;
+    }
+  };
+
+  function submitVote() {
+    var selectedColor = document.querySelector('input[name="color"]:checked');
+
+    if (selectedColor) {
+      var resultDiv = document.getElementById('result');
+      resultDiv.innerHTML = 'あなたの選択: ' + selectedColor.value;
+
+      // 選択をローカルストレージに保存
+      localStorage.setItem('userVote', selectedColor.value);
+    } else {
+      alert('色を選んでください！');
+    }
+  }
+
+  function clearVote() {
+    // ローカルストレージからデータを削除
+    localStorage.removeItem('userVote');
+
+    // 結果をクリア
+    var resultDiv = document.getElementById('result');
+    resultDiv.innerHTML = 'データが削除されました。';
+  }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>投票アプリ</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+  </style>
+</head>
+<body>
+
+<h1>お好きな色を選んでください</h1>
+
+<form id="voteForm">
+  <label>
+    <input type="radio" name="color" value="red"> 赤
+  </label>
+  <label>
+    <input type="radio" name="color" value="blue"> 青
+  </label>
+  <label>
+    <input type="radio" name="color" value="green"> 緑
+  </label>
+  <br>
+  <button type="button" onclick="submitVote()">投票する</button>
+</form>
+
+<div id="result"></div>
+
+<script>
+  function submitVote() {
+    var selectedColor = document.querySelector('input[name="color"]:checked');
+
+    if (selectedColor) {
+      var resultDiv = document.getElementById('result');
+      resultDiv.innerHTML = 'あなたの選択: ' + selectedColor.value;
+    } else {
+      alert('色を選んでください！');
+    }
+  }
+</script>
+
+</body>
+</html>
