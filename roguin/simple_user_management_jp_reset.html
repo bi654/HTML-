@@ -1,0 +1,55 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>簡易ユーザー管理システム</title>
+</head>
+<body>
+    <h2>ユーザー作成</h2>
+    <input type="text" id="newUsername" placeholder="新しいユーザー名">
+    <input type="password" id="newPassword" placeholder="新しいパスワード">
+    <button onclick="createUser()">ユーザー作成</button>
+
+    <h2>ログイン</h2>
+    <input type="text" id="username" placeholder="ユーザー名">
+    <input type="password" id="password" placeholder="パスワード">
+    <button onclick="login()">ログイン</button>
+
+    <button onclick="resetUsers()">ユーザー情報リセット</button>
+
+    <script>
+    
+function createUser() {
+    var newUsername = document.getElementById("newUsername").value;
+    var newPassword = document.getElementById("newPassword").value;
+
+    // ユーザー情報をローカルストレージに保存
+    localStorage.setItem(newUsername, newPassword);
+    alert("ユーザーが作成されました: " + newUsername);
+}
+
+function login() {
+    var username = document.getElementById("username").value;
+    var password = document.getElementById("password").value;
+
+    // ユーザー情報をローカルストレージから取得
+    var storedPassword = localStorage.getItem(username);
+
+    if(password === storedPassword) {
+        // ログイン成功
+        alert("ユーザー " + username + " でのログインに成功しました");
+    } else {
+        // ログイン失敗
+        alert("認証情報が無効です");
+    }
+}
+
+function resetUsers() {
+    // ローカルストレージからすべてのユーザー情報を削除
+    localStorage.clear();
+    alert("すべてのユーザー情報がリセットされました");
+}
+
+    </script>
+</body>
+</html>
