@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>さらにすごいHTMLコードの例</title>
+<style>
+  body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;margin:0;padding:0;background-color:#f8f9fa}
+  header{background-color:#343a40;color:#fff;padding:20px;text-align:center}
+  nav{background-color:#495057;color:#fff;padding:10px 0;text-align:center}
+  nav a{color:#fff;text-decoration:none;margin:0 15px;transition:color 0.3s ease}
+  nav a:hover{color:#ffc107}
+  section{padding:20px;display:flex;justify-content:center;flex-wrap:wrap}
+  article{background-color:#fff;border-radius:8px;box-shadow:0 8px 16px rgba(0,0,0,0.2);padding:20px;margin:20px;width:300px;text-align:center;position:relative;overflow:hidden;transition:transform 0.3s ease}
+  article:hover{transform:translateY(-10px)}
+  article::before{content:"";position:absolute;top:0;left:0;width:100%;height:100%;background:linear-gradient(to bottom,rgba(0,0,0,0.2) 0%,rgba(0,0,0,0.8) 100%);z-index:1;opacity:0;transition:opacity 0.3s ease}
+  article:hover::before{opacity:1}
+  article h2,article p{color:#fff;z-index:2;position:relative}
+  footer{background-color:#343a40;color:#fff;text-align:center;padding:20px 0}
+  footer p{margin:0}
+  a{text-decoration:none}
+</style>
+</head>
+<body>
+<header><h1>さらにすごいHTMLコードの例</h1></header>
+<nav>
+<a href="#">ホーム</a>
+<a href="#">特集</a>
+<a href="#">ギャラリー</a>
+<a href="#">お問い合わせ</a>
+</nav>
+<section>
+<a href="#"><article><h2>魅力的な景色</h2><p>美しい自然の風景を楽しむ</p></article></a>
+<a href="#"><article><h2>エキサイティングな遊び</h2><p>スリル満点のアクティビティを体験する</p></article></a>
+<a href="#"><article><h2>最新のトレンド</h2><p>最新のトレンドをチェックする</p></article></a>
+<a href="#"><article><h2>インスピレーションを得る</h2><p>創造性を刺激するアイデアを見つける</p></article></a>
+</section>
+<footer><p>&copy; 2024 さらにすごい会社. All rights reserved.</p></footer>
+</body>
+</html>

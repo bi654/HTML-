@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>カウントダウンタイマー</title>
+  <style>
+    body {
+      text-align: center;
+      margin: 50px;
+    }
+
+    #countdownTimer {
+      font-size: 24px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+<!-- 初期値をダミーの日付に設定 -->
+<p>目標日時: <input type="datetime-local" id="targetDateTimeInput" value="2024-03-10T12:00"><button onclick="changeTargetDateTime()">変更</button></p>
+<p id="countdownTimer"></p>
+
+<script>
+  var targetDate;
+  var countdownInterval;
+
+  updateTargetDate();
+
+  function startCountdown() {
+    countdownInterval = setInterval(function() {
+      document.getElementById("countdownTimer").innerText = getCountdown(targetDate);
+    }, 1000);
+  }
+
+  function stopCountdown() {
+    clearInterval(countdownInterval);
+  }
+
+  function getCountdown(target) {
+    var now = new Date().getTime();
+    var distance = target - now;
+
+    if (distance < 0) {
+      stopCountdown();
+      return "過ぎました";
+    }
+
+    var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+    return days + "日 " + hours + "時間 " + minutes + "分 " + seconds + "秒";
+  }
+
+  function updateTargetDate() {
+    var inputDate = document.getElementById("targetDateTimeInput").value;
+
+    if (inputDate === "") {
+      alert("目標日時を入力してください。");
+      return;
+    }
+
+    var dateTimePattern = /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2})$/;
+    var match = inputDate.match(dateTimePattern);
+
+    if (!match) {
+      alert("無効な日時です。正しい形式で入力してください。");
+      document.getElementById("targetDateTimeInput").value = "";
+      return;
+    }
+
+    targetDate = new Date(match[1], match[2] - 1, match[3], match[4], match[5]).getTime();
+
+    startCountdown();
+  }
+
+  function changeTargetDateTime() {
+    stopCountdown();
+    updateTargetDate();
+  }
+</script>
+
+</body>
+</html>

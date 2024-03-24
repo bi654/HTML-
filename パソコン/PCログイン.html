@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>サインイン</title>
+<style>
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  overflow: hidden; /* スクロールバーを非表示 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #000000; /* 背景色を灰色に変更 */
+  color: #333; /* テキスト色を暗めのグレーに変更 */
+}
+
+.container {
+  text-align: center;
+}
+
+.form-container {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* 影を追加 */
+}
+
+input[type="text"],
+input[type="password"],
+input[type="submit"] {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+input[type="submit"] {
+  background-color: #007bff; /* ボタンの背景色を青に変更 */
+  color: #fff; /* ボタンのテキスト色を白に変更 */
+  cursor: pointer;
+}
+
+input[type="submit"]:hover {
+  background-color: #0056b3; /* ホバー時の背景色を濃い青に変更 */
+}
+
+.message {
+  margin-top: 10px;
+  font-size: 14px;
+  color: #888; /* メッセージのテキスト色を灰色に変更 */
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+  <div class="form-container">
+    <h2>サインイン</h2>
+    <form id="loginForm">
+      <input type="text" name="username" placeholder="ユーザー名" required autocomplete="off">
+      <br>
+      <input type="password" name="password" placeholder="パスワード" required autocomplete="off">
+      <br>
+      <input type="submit" value="ログイン">
+    </form>
+    <div class="message">アカウントをお持ちでない場合は<a href="#">登録する</a></div>
+  </div>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  const loginForm = document.getElementById('loginForm');
+
+  loginForm.addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    const formData = new FormData(loginForm);
+    const username = formData.get('username');
+    const password = formData.get('password');
+
+    // 仮のログイン処理
+    if (username === "yoi" && password === "yoi") {
+      // ログインが成功した場合の処理
+      window.location.href = "サインインロード.html"; // リダイレクト先のURLを指定
+    } else {
+      // ログインが失敗した場合の処理
+      alert("ユーザー名またはパスワードが正しくありません。");
+    }
+  });
+});
+</script>
+
+</body>
+</html>

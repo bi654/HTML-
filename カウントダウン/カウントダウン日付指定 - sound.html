@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>カウントダウンタイマー</title>
+  <style>
+    body {
+      text-align: center;
+      margin: 50px;
+    }
+
+    #countdownTimer {
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    #error-message {
+      color: red;
+      font-weight: bold;
+    }
+  </style>
+</head>
+
+<body>
+
+  <p>目標日時: <input type="datetime-local" id="targetDateTimeInput"><button onclick="changeTargetDateTime()">変更</button></p>
+  <p id="countdownTimer"></p>
+  <p id="error-message"></p>
+
+  <!-- 追加: 音声ファイルを相対パスで指定 -->
+  <audio id="audio" src="sound/Clock-Alarm04-01(Mid).mp3" preload="auto"></audio>
+
+
+  <script>
+    var targetDate;
+    var countdownInterval;
+    var audio = document.getElementById("audio"); // 追加: 音声要素
+
+    updateTargetDate();
+
+    function startCountdown() {
+      countdownInterval = setInterval(function () {
+        var countdown = getCountdown(targetDate);
+        document.getElementById("countdownTimer").innerText = countdown;
+
+        // 追加: カウントダウンが終了したら音声を再生
+        if (countdown === "過ぎました" && audio.src) {
+          playSound();
+          stopCountdown(); // カウントダウンを停止
+        }
+      }, 1000);
+    }
+
+    function stopCountdown() {
+      clearInterval(countdownInterval);
+    }
+
+    function getCountdown(target) {
+      var now = new Date().getTime();
+      var distance = target - now;
+
+      if (distance < 0) {
+        return "過ぎました";
+      }
+
+      var days = pad(Math.floor(distance / (1000 * 60 * 60 * 24)));
+      var hours = pad(Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)));
+      var minutes = pad(Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)));
+      var seconds = pad(Math.floor((distance % (1000 * 60)) / 1000));
+
+      return `${days}:${hours}:${minutes}:${seconds}`;
+    }
+
+    function pad(num) {
+      return num < 10 ? "0" + num : num;
+    }
+
+    function updateTargetDate() {
+      var inputDate = document.getElementById("targetDateTimeInput").value;
+
+      if (inputDate === "") {
+        document.getElementById("error-message").innerText = "目標日時を入力してください。";
+        return;
+      }
+
+      targetDate = new Date(inputDate).getTime();
+
+      if (isNaN(targetDate) || inputDate.length !== 16 || targetDate <= new Date().getTime()) {
+        document.getElementById("error-message").innerText = "無効な日時です。未来の日時を正しい形式で入力してください。";
+        document.getElementById("targetDateTimeInput").value = "";
+        return;
+      } else {
+        document.getElementById("error-message").innerText = "";
+        startCountdown();
+      }
+    }
+
+    function changeTargetDateTime() {
+      stopCountdown();
+      updateTargetDate();
+    }
+
+    // 追加: 音声を再生する関数
+    function playSound() {
+      try {
+        audio.play();
+      } catch (error) {
+        console.error("音声の再生中にエラーが発生しました:", error);
+        document.getElementById("error-message").innerText = "音声の再生中にエラーが発生しました。";
+      }
+    }
+
+    // 追加: サウンドファイルが読み込まれたときの処理
+    audio.addEventListener("canplaythrough", function () {
+      document.getElementById("error-message").innerText = ""; // エラーメッセージをクリア
+    });
+
+    // 追加: サウンドファイルが読み込めないときの処理
+    audio.addEventListener("error", function () {
+      console.error("音声ファイルが読み込めませんでした。");
+      document.getElementById("error-message").innerText = "音声ファイルが読み込めませんでした。";
+    });
+  </script>
+
+</body>
+
+</html>
