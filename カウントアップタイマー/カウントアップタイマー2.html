@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>シンプルなタイマー</title>
+    <style>
+        body {
+            background-color: green;
+            font-family: "MS ゴシック", "MS Gothic", sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        #timer {
+            color: white;
+            background-color: rgba(0, 255, 0, 0.0);
+            font-size: 100px;
+            padding: 10px;
+            margin-bottom: 20px;
+        }
+
+        #buttons {
+            display: flex;
+            gap: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1></h1>
+    <p id="timer">00:00:00</p>
+    <div id="buttons">
+        <button onclick="toggleTimer()">スタート / 停止</button>
+        <button onclick="resetTimer()">リセット</button>
+        <button onclick="recordLap()">ラップ</button>
+    </div>
+
+    <script>
+        var startTime;
+        var timerInterval;
+        var isPaused = true;
+        var lapTimes = [];
+
+        function toggleTimer() {
+            if (isPaused) {
+                startTimer();
+            } else {
+                pauseTimer();
+            }
+        }
+
+        function startTimer() {
+            isPaused = false;
+            if (!startTime) {
+                startTime = new Date();
+            }
+            timerInterval = setInterval(updateTimer, 1000);
+        }
+
+        function pauseTimer() {
+            isPaused = true;
+            clearInterval(timerInterval);
+        }
+
+        function resetTimer() {
+            isPaused = true;
+            clearInterval(timerInterval);
+            startTime = undefined;
+            lapTimes = [];
+            updateTimerDisplay("00:00:00");
+        }
+
+        function recordLap() {
+            if (!isPaused) {
+                var lapTime = calculateLapTime();
+                lapTimes.push(formatTime(lapTime));
+                alert("ラップタイム: " + lapTimes[lapTimes.length - 1]);
+            }
+        }
+
+        function calculateLapTime() {
+            var currentTime = new Date();
+            var lapTime = currentTime - startTime;
+            return lapTime;
+        }
+
+        function updateTimer() {
+            if (!isPaused) {
+                var lapTime = calculateLapTime();
+                updateTimerDisplay(formatTime(lapTime));
+            }
+        }
+
+        function formatTime(time) {
+            var hours = Math.floor(time / (1000 * 60 * 60));
+            var minutes = Math.floor((time % (1000 * 60 * 60)) / (1000 * 60));
+            var seconds = Math.floor((time % (1000 * 60)) / 1000);
+            hours = (hours < 10) ? "0" + hours : hours;
+            minutes = (minutes < 10) ? "0" + minutes : minutes;
+            seconds = (seconds < 10) ? "0" + seconds : seconds;
+            return hours + ":" + minutes + ":" + seconds;
+        }
+
+        function updateTimerDisplay(time) {
+            document.getElementById("timer").innerHTML = time;
+        }
+    </script>
+</body>
+</html>

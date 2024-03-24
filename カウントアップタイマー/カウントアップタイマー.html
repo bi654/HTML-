@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>cat</title>
+    <style>
+        body {
+            background-color: green; /* クロマキーの緑の背景色 */
+            font-family: "MS ゴシック", "MS Gothic", sans-serif; /* MSゴシックを優先して指定 */
+        }
+
+        #timer {
+            color: white; /* タイマーの文字色 */
+            background-color: rgba(0, 255, 0, 0.0); /* クロマキーの緑を透明に設定 */
+            font-size: 100px;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1></h1>
+    <p id="timer">00:00:00</p>
+    <button onclick="startTimer()">スタート</button>
+    <button onclick="pauseTimer()">停止</button>
+    <button onclick="resetTimer()">リセット</button>
+
+    <script>
+        var startTime;
+        var timerInterval; // タイマーの間隔を格納する変数
+        var isPaused = true; // タイマーが一時停止されたかどうかを示すフラグ
+
+        function updateTimer() {
+            if (!isPaused) {
+                var currentTime = new Date();
+                var timeDiff = currentTime - startTime;
+                var hours = Math.floor(timeDiff / (1000 * 60 * 60));
+                var minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
+                var seconds = Math.floor((timeDiff % (1000 * 60)) / 1000);
+                hours = (hours < 10) ? "0" + hours : hours;
+                minutes = (minutes < 10) ? "0" + minutes : minutes;
+                seconds = (seconds < 10) ? "0" + seconds : seconds;
+                document.getElementById("timer").innerHTML = hours + ":" + minutes + ":" + seconds;
+            }
+        }
+
+        function startTimer() {
+            isPaused = false;
+            if (!startTime) {
+                startTime = new Date(); // 開始時刻を現在時刻にリセット
+            }
+            timerInterval = setInterval(updateTimer, 1000); // 新しいタイマーを開始
+        }
+
+        function pauseTimer() {
+            isPaused = true;
+            clearInterval(timerInterval); // タイマーをクリアして一時停止
+        }
+
+        function resetTimer() {
+            isPaused = true;
+            clearInterval(timerInterval); // タイマーをクリアしてリセット
+            startTime = undefined; // 開始時刻を未定義にリセット
+            document.getElementById("timer").innerHTML = "00:00:00"; // 表示される時間をゼロにリセット
+        }
+
+        // Y V Tキーが押されたらリセット　停止　スタートする
+        document.addEventListener("keydown", function(event) {
+            if (event.key === "y" || event.key === "Y") {
+                resetTimer();
+            } else if (event.key === "v" || event.key === "V") {
+                pauseTimer();
+            } else if (event.key === "t" || event.key === "T") {
+                startTimer();
+            }
+        });
+    </script>
+</body>
+</html>
