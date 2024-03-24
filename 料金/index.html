@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>料金計算</title>
+</head>
+<body>
+    <div class="container">
+        <h1>料金計算</h1>
+        <label for="course">コースを選択してください:</label>
+        <select id="course">
+            <option value="first-hour">初めの一杯からコース</option>
+            <option value="alcohol">飲み放題（アルコール）</option>
+            <option value="soft-drink">飲み放題（ソフトドリンク）</option>
+        </select>
+        <label for="hours">経過時間を入力してください（時間）:</label>
+        <input type="number" id="hours" placeholder="経過時間を入力" min="0" disabled>
+        <label for="customPrice">カスタム料金を入力してください:</label>
+        <input type="number" id="customPrice" placeholder="料金を入力" min="0">
+        <button id="calculate">計算</button>
+        <p>合計金額（システム利用料金を含まない）：<span id="totalAmountWithoutFee">0円</span></p>
+        <p>合計金額（システム利用料金込み２％）：<span id="totalAmountWithFee">0円</span></p>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
